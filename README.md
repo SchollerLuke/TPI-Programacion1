@@ -1,4 +1,4 @@
-# TPI-Programacion
+# TPI Programacion 1
 
 # Sistema de Gestión y Análisis de Países
 
@@ -14,7 +14,7 @@ Este proyecto consiste en una aplicación desarrollada en Python que permite ges
 **Carrera:** Tecnicatura Universitaria en Programación
 **Materia:** Programación 1  
 **Año:** 2026  
-**Comisiones:** 21 y 13
+**Comisiones:** 13 y 21
 
 ---
 
@@ -37,8 +37,14 @@ Este proyecto consiste en una aplicación desarrollada en Python que permite ges
 TPI-Programacion1/
 │
 ├── programa.py
-├── paises.csv
+├── datos_paises.csv
 ├── README.md
+│
+├── funciones/
+│   ├── busqueda.py
+│   ├── estadisticas.py
+│   ├── ordenamiento.py
+│   └── principales.py
 │
 └── docs/
     └── informe.pdf
@@ -49,8 +55,12 @@ TPI-Programacion1/
 | Archivo | Descripción |
 |----------|------------|
 | `programa.py` | Programa principal |
-| `paises.csv` | Dataset con información de países |
+| `datos_paises.csv` | Dataset con información de países |
 | `README.md` | Documentación del proyecto |
+| `funciones/busqueda.py` | Código con las funciones de búsqueda |
+| `funciones/estadisticas.py` | Código con las funciones de estadísticas |
+| `funciones/ordenamiento.py` | Código con las funciones de ordenamiento |
+| `funciones/principales.py` | Código con las funciones principales |
 | `docs/informe.pdf` | Informe del trabajo |
 
 ---
@@ -74,7 +84,6 @@ python programa.py
 Este proyecto utiliza únicamente librerías estándar de Python:
 
 - `csv`
-- `os`
 
 No requiere instalación de dependencias externas.
 
@@ -99,10 +108,13 @@ https://youtu.be/XXXXXXXXXXX
 **Entrada**
 
 ```text
-1. Mostrar países
-2. Buscar país
-3. Ver estadísticas
-4. Salir
+1. Agregar país
+2. Actualizar datos
+3. Buscar país por nombre
+4. Buscar país por filtro
+5. Ordenar países por filtro
+6. Mostrar estadísticas
+7. Salir
 
 Seleccione una opción: 2
 ```
