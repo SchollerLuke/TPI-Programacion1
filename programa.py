@@ -4,7 +4,7 @@ import funciones.principales
 def lectura_inicial():
     paises = []
     try:
-        with open("paises_mundo.csv", "r", newline="", encoding="utf-8") as dataset:
+        with open("datos_paises.csv", "r", newline="", encoding="utf-8") as dataset:
             lector = csv.DictReader(dataset)
             for fila in lector:
                 paises.append(fila)
@@ -119,52 +119,13 @@ while paises != None:
             pass
 
         case 4:
-            match imprimir_menu("buscar"):
-
-                case 1:
-                    pass
-
-                case 2:
-                    pass
-
-                case 3:
-                    pass
-
-                case 4:
-                    continue        
+            pass      
 
         case 5:
-            match imprimir_menu("ordenar"):
-
-                case 1:
-                    pass
-
-                case 2:
-                    pass
-
-                case 3:
-                    pass
-
-                case 4:
-                    continue
+            pass
 
         case 6:
-            match imprimir_menu("ordenar"):
-
-                case 1:
-                    pass
-
-                case 2:
-                    pass
-
-                case 3:
-                    pass
-
-                case 4:
-                    pass
-
-                case 5:
-                    continue
+            pass
 
         case 7:
             break
