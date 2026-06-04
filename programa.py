@@ -1,0 +1,170 @@
+import csv
+import funciones.principales
+
+def lectura_inicial():
+    paises = []
+    try:
+        with open("paises_mundo.csv", "r", newline="", encoding="utf-8") as dataset:
+            lector = csv.DictReader(dataset)
+            for fila in lector:
+                paises.append(fila)
+
+    except FileNotFoundError:
+        print("\nError: el archivo no existe")
+    except PermissionError:
+        print("\nError: otro programa puede tener abierto el archivo")
+    except IndexError:
+        print("\nError: índice fuera de rango, pueden faltar datos en el archivo")
+    except ValueError:
+        print("\nError: valor inválido en el archivo")
+    except Exception as e:
+            print(f"\nError inesperado: {e}")
+    else: return paises
+
+def imprimir_menu(menu):
+
+    match menu:
+
+        case "principal":
+            opciones = (1,8)
+            print("\n" + "=" * 40)
+            print("MENU PRINCIPAL".center(40))
+            print("=" * 40)
+            print("1. Agregar país")
+            print("2. Actualizar datos")
+            print("3. Buscar país por nombre")
+            print("4. Buscar país por filtro")
+            print("5. Ordenar países por filtro")
+            print("6. Mostrar estadísticas")
+            print("7. Salir")
+            print("=" * 40)
+
+        case "buscar":
+            opciones = (1,5)
+            print("\n" + "=" * 40)
+            print("MENU DE BUSQUEDA".center(40))
+            print("=" * 40)
+            print("1. Por continente")
+            print("2. Rango de población")
+            print("3. Rango de superficie")
+            print("4. Volver al menú principal")
+            print("=" * 40)
+
+        case "ordenar":
+            opciones = (1,5)
+            print("\n" + "=" * 40)
+            print("MENU DE ORDENAMIENTO".center(40))
+            print("=" * 40)
+            print("1. Por nombre")
+            print("2. Por población")
+            print("3. Por superficie")
+            print("4. Volver al menú principal")
+            print("=" * 40)
+
+        case "estadistica":
+            opciones = (1,6)
+            print("\n" + "=" * 40)
+            print("MENU DE ESTADISTICA".center(40))
+            print("=" * 40)
+            print("1. País con menor y mayor población")
+            print("2. Promedio de población")
+            print("3. Promedio de superficie")
+            print("4. Cantidad de países por continente")
+            print("5. Volver al menú principal")
+            print("=" * 40)
+
+    while True:
+        opcion = comprobar("Seleccione una opción: ")
+        if opcion in range(opciones): break
+        else: print("Error: opción ingresada inválida")
+    return opcion
+
+def comprobar(texto, entero=True):
+    """Función que comprueba validez de datos ingresados
+    
+    Parámetros:
+    ---
+    * texto: se ingresa un texto para indicarle al usuario que debe ingresar
+    * entero: valor por defecto en True si se ingresa un entero
+    (si se ingresa en False, indica que es un string)
+    """
+
+    while True:
+        try:
+            ingreso = input(texto).title()
+            if entero == True: ingreso = int(ingreso)
+            break
+
+        except ValueError:
+            print("Error: valor inválido")
+        except Exception as e:
+            print(f"Error inesperado: {e}")
+        
+    return ingreso    
+
+print("\nIniciando programa de gestión y análisis de países...")
+paises = lectura_inicial()
+if paises == None: print("Solucione el error detectado en el archivo y vuelva a ejecutar el programa")
+
+while paises != None:
+    match imprimir_menu("principal"):
+
+        case 1:
+            pass
+
+        case 2:
+            pass
+
+        case 3:
+            pass
+
+        case 4:
+            match imprimir_menu("buscar"):
+
+                case 1:
+                    pass
+
+                case 2:
+                    pass
+
+                case 3:
+                    pass
+
+                case 4:
+                    continue        
+
+        case 5:
+            match imprimir_menu("ordenar"):
+
+                case 1:
+                    pass
+
+                case 2:
+                    pass
+
+                case 3:
+                    pass
+
+                case 4:
+                    continue
+
+        case 6:
+            match imprimir_menu("ordenar"):
+
+                case 1:
+                    pass
+
+                case 2:
+                    pass
+
+                case 3:
+                    pass
+
+                case 4:
+                    pass
+
+                case 5:
+                    continue
+
+        case 7:
+            break
