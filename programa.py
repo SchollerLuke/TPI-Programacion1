@@ -1,6 +1,16 @@
 import csv
 import funciones.principales
 
+todos_los_continentes = [
+    "África",
+    "América Central",
+    "América Del Norte",
+    "América Del Sur",
+    "Asia",
+    "Europa",
+    "Oceanía"
+]
+
 def lectura_inicial():
     paises = []
     try:
@@ -19,7 +29,20 @@ def lectura_inicial():
         print("\nError: valor inválido en el archivo")
     except Exception as e:
             print(f"\nError inesperado: {e}")
+
     else: return paises
+
+def escribir_archivo(contenido, claves):
+    try:
+        with open("datos_paises.csv", "w", newline="", encoding="utf-8") as dataset:
+            escritor = csv.DictWriter(dataset, fieldnames=claves)
+            escritor.writeheader()
+            escritor.writerows(contenido)
+
+    except PermissionError:
+        print("Error: otro programa puede tener abierto el archivo")
+    except Exception as e:
+            print(f"Error inesperado: {e}")
 
 def imprimir_menu(menu):
 
@@ -36,7 +59,7 @@ def imprimir_menu(menu):
             print("4. Buscar país por filtro")
             print("5. Ordenar países por filtro")
             print("6. Mostrar estadísticas")
-            print("7. Salir")
+            print("7. Salir y guardar")
             print("=" * 40)
 
         case "buscar":
@@ -74,58 +97,43 @@ def imprimir_menu(menu):
             print("=" * 40)
 
     while True:
-        opcion = comprobar("Seleccione una opción: ")
-        if opcion in range(opciones): break
+        opcion = funciones.principales.comprobar("Seleccione una opción: ")
+        if opcion in range(opciones[0], opciones[1]): break
         else: print("Error: opción ingresada inválida")
     return opcion
 
-def comprobar(texto, entero=True):
-    """Función que comprueba validez de datos ingresados
+def main():
+    print("\nIniciando programa de gestión y análisis de países...")
+    paises = lectura_inicial()
+    if paises == None: print("Solucione el error detectado en el archivo y vuelva a ejecutar el programa")
+    else: claves = list(paises[0].keys())
     
-    Parámetros:
-    ---
-    * texto: se ingresa un texto para indicarle al usuario que debe ingresar
-    * entero: valor por defecto en True si se ingresa un entero
-    (si se ingresa en False, indica que es un string)
-    """
-
-    while True:
-        try:
-            ingreso = input(texto).title()
-            if entero == True: ingreso = int(ingreso)
-            break
-
-        except ValueError:
-            print("Error: valor inválido")
-        except Exception as e:
-            print(f"Error inesperado: {e}")
+    while paises != None:
+        match imprimir_menu("principal"):
+    
+            case 1:
+                paises = funciones.principales.agregar_pais(paises, claves, todos_los_continentes)
+    
+            case 2:
+                paises = funciones.principales.actualizar_datos(paises, claves)
+    
+            case 3:
+                funciones.principales.buscar_nombre(paises, claves)
+    
+            case 4:
+                funciones.principales.buscar_filtro(paises, claves)     
+    
+            case 5:
+                funciones.principales.ordenar_filtro(paises, claves)
+    
+            case 6:
+                funciones.principales.mostrar_estadisticas(paises, claves)
+    
+            case 7:
+                escribir_archivo(paises, claves)
+                break
         
-    return ingreso    
+        input("Presione enter para continuar...")
 
-print("\nIniciando programa de gestión y análisis de países...")
-paises = lectura_inicial()
-if paises == None: print("Solucione el error detectado en el archivo y vuelva a ejecutar el programa")
-
-while paises != None:
-    match imprimir_menu("principal"):
-
-        case 1:
-            pass
-
-        case 2:
-            pass
-
-        case 3:
-            pass
-
-        case 4:
-            pass      
-
-        case 5:
-            pass
-
-        case 6:
-            pass
-
-        case 7:
-            break
+if __name__ == "__main__":
+    main()
