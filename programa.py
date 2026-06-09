@@ -115,19 +115,19 @@ def main():
                 paises = funciones.principales.agregar_pais(paises, claves, todos_los_continentes)
     
             case 2:
-                pass
+                paises = funciones.principales.actualizar_datos(paises, claves)
     
             case 3:
-                pass
+                funciones.principales.buscar_nombre(paises, claves)
     
             case 4:
-                pass      
+                funciones.principales.buscar_filtro(paises, claves)     
     
             case 5:
-                pass
+                funciones.principales.ordenar_filtro(paises, claves)
     
             case 6:
-                pass
+                funciones.principales.mostrar_estadisticas(paises, claves)
     
             case 7:
                 escribir_archivo(paises, claves)
