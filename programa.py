@@ -1,6 +1,16 @@
 import csv
 import funciones.principales
 
+todos_los_continentes = [
+    "África",
+    "América Central",
+    "América Del Norte",
+    "América Del Sur",
+    "Asia",
+    "Europa",
+    "Oceanía"
+]
+
 def lectura_inicial():
     paises = []
     try:
@@ -22,6 +32,18 @@ def lectura_inicial():
 
     else: return paises
 
+def escribir_archivo(contenido, claves):
+    try:
+        with open("datos_paises.csv", "w", newline="", encoding="utf-8") as dataset:
+            escritor = csv.DictWriter(dataset, fieldnames=claves)
+            escritor.writeheader()
+            escritor.writerows(contenido)
+
+    except PermissionError:
+        print("Error: otro programa puede tener abierto el archivo")
+    except Exception as e:
+            print(f"Error inesperado: {e}")
+
 def imprimir_menu(menu):
 
     match menu:
@@ -37,7 +59,7 @@ def imprimir_menu(menu):
             print("4. Buscar país por filtro")
             print("5. Ordenar países por filtro")
             print("6. Mostrar estadísticas")
-            print("7. Salir")
+            print("7. Salir y guardar")
             print("=" * 40)
 
         case "buscar":
@@ -90,7 +112,7 @@ def main():
         match imprimir_menu("principal"):
     
             case 1:
-                paises = funciones.principales.agregar_pais(paises, claves)
+                paises = funciones.principales.agregar_pais(paises, claves, todos_los_continentes)
     
             case 2:
                 pass
@@ -108,6 +130,7 @@ def main():
                 pass
     
             case 7:
+                escribir_archivo(paises, claves)
                 break
         
         input("Presione enter para continuar...")
