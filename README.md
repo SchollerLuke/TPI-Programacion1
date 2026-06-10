@@ -41,8 +41,8 @@ TPI-Programacion1/
 ├── README.md
 │
 ├── funciones/
-│   ├── busqueda.py
 │   ├── estadisticas.py
+│   ├── filtrado.py
 │   ├── ordenamiento.py
 │   └── principales.py
 │
@@ -57,8 +57,8 @@ TPI-Programacion1/
 | `programa.py` | Programa principal |
 | `datos_paises.csv` | Dataset con información de países |
 | `README.md` | Documentación del proyecto |
-| `funciones/busqueda.py` | Código con las funciones de búsqueda |
 | `funciones/estadisticas.py` | Código con las funciones de estadísticas |
+| `funciones/filtrado.py` | Código con las funciones de filtrado |
 | `funciones/ordenamiento.py` | Código con las funciones de ordenamiento |
 | `funciones/principales.py` | Código con las funciones principales |
 | `docs/informe.pdf` | Informe del trabajo |
@@ -108,45 +108,66 @@ https://youtu.be/XXXXXXXXXXX
 **Entrada**
 
 ```text
+========================================
+             MENU PRINCIPAL             
+========================================
 1. Agregar país
 2. Actualizar datos
 3. Buscar país por nombre
 4. Buscar país por filtro
 5. Ordenar países por filtro
 6. Mostrar estadísticas
-7. Salir
-
-Seleccione una opción: 2
+7. Salir y guardar
+========================================
+Seleccione una opción: 3
 ```
 
 **Salida**
 
 ```text
-Ingrese el nombre del país: Argentina
-
-País encontrado:
-Nombre: Argentina
-Población: 47067441
-Superficie: 2780400 km²
-Continente: América
+----------------------------------------
+Ingrese el país a buscar: Argentina
+País encontrado: Argentina
+Población: 42669500
+Superficie: 2780400
+Continente: América Del Sur
+----------------------------------------
+Presione enter para continuar...
 ```
 
 ---
 
 ### Estadísticas
 
+**Entrada**
+
+```text
+========================================
+          MENU DE ESTADISTICA           
+========================================
+1. País con menor y mayor población
+2. Promedio de población
+3. Promedio de superficie
+4. Cantidad de países por continente
+5. Volver al menú principal
+========================================
+Seleccione una opción: 4
+```
+
 **Salida**
 
 ```text
-Cantidad total de países: 195
-
-Continente con más países: África
-
-País con mayor población:
-India - 1428627663 habitantes
-
-País con mayor superficie:
-Rusia - 17098242 km²
+----------------------------------------
+Lista de países por continente: 
+>> África: 46
+>> América Central: 19
+>> América Del Norte: 3
+>> América Del Sur: 10
+>> Asia: 39
+>> Europa: 39
+>> Oceanía: 13
+----------------------------------------
+Presione enter para continuar...
 ```
 
 ---
