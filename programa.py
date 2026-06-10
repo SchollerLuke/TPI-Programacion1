@@ -12,6 +12,8 @@ todos_los_continentes = [
 ]
 
 def lectura_inicial():
+    """Función que lee el archivo CSV cuando se inicia el programa"""
+    
     paises = []
     try:
         with open("datos_paises.csv", "r", newline="", encoding="utf-8") as dataset:
@@ -33,6 +35,9 @@ def lectura_inicial():
     else: return paises
 
 def escribir_archivo(contenido, claves):
+    """Función que escribe el archivo CSV con los datos actualizados
+    * Solo se escribe cuando el usuario finaliza el programa y lo guarda mediante el menú"""
+
     try:
         with open("datos_paises.csv", "w", newline="", encoding="utf-8") as dataset:
             escritor = csv.DictWriter(dataset, fieldnames=claves)
@@ -45,7 +50,12 @@ def escribir_archivo(contenido, claves):
             print(f"Error inesperado: {e}")
 
 def imprimir_menu(menu):
-
+    """Función que imprime los menús de opciones
+    
+    Parámetros:
+    ---
+    * menu: representa el tipo de menu al que se ingresa
+    """
     match menu:
 
         case "principal":
@@ -62,10 +72,10 @@ def imprimir_menu(menu):
             print("7. Salir y guardar")
             print("=" * 40)
 
-        case "buscar":
+        case "filtrar":
             opciones = (1,5)
             print("\n" + "=" * 40)
-            print("MENU DE BUSQUEDA".center(40))
+            print("MENU DE FILTRADO".center(40))
             print("=" * 40)
             print("1. Por continente")
             print("2. Rango de población")
@@ -84,7 +94,7 @@ def imprimir_menu(menu):
             print("4. Volver al menú principal")
             print("=" * 40)
 
-        case "estadistica":
+        case "estadisticas":
             opciones = (1,6)
             print("\n" + "=" * 40)
             print("MENU DE ESTADISTICA".center(40))
@@ -103,6 +113,8 @@ def imprimir_menu(menu):
     return opcion
 
 def main():
+    """Función principal donde corre todo el programa"""
+    
     print("\nIniciando programa de gestión y análisis de países...")
     paises = lectura_inicial()
     if paises == None: print("Solucione el error detectado en el archivo y vuelva a ejecutar el programa")
@@ -121,13 +133,16 @@ def main():
                 funciones.principales.buscar_nombre(paises, claves)
     
             case 4:
-                funciones.principales.buscar_filtro(paises, claves)     
+                opcion = imprimir_menu("filtrar")
+                funciones.principales.buscar_filtro(paises, claves, opcion, todos_los_continentes)     
     
             case 5:
-                funciones.principales.ordenar_filtro(paises, claves)
+                opcion = imprimir_menu("ordenar")
+                funciones.principales.ordenar_filtro(paises, claves, opcion)
     
             case 6:
-                funciones.principales.mostrar_estadisticas(paises, claves)
+                opcion = imprimir_menu("estadisticas")
+                funciones.principales.mostrar_estadisticas(paises, claves, opcion, todos_los_continentes)
     
             case 7:
                 escribir_archivo(paises, claves)
