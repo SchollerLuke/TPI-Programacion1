@@ -62,10 +62,10 @@ def imprimir_menu(menu):
             print("7. Salir y guardar")
             print("=" * 40)
 
-        case "buscar":
+        case "filtrar":
             opciones = (1,5)
             print("\n" + "=" * 40)
-            print("MENU DE BUSQUEDA".center(40))
+            print("MENU DE FILTRADO".center(40))
             print("=" * 40)
             print("1. Por continente")
             print("2. Rango de población")
@@ -84,7 +84,7 @@ def imprimir_menu(menu):
             print("4. Volver al menú principal")
             print("=" * 40)
 
-        case "estadistica":
+        case "estadisticas":
             opciones = (1,6)
             print("\n" + "=" * 40)
             print("MENU DE ESTADISTICA".center(40))
@@ -121,13 +121,16 @@ def main():
                 funciones.principales.buscar_nombre(paises, claves)
     
             case 4:
-                funciones.principales.buscar_filtro(paises, claves)     
+                opcion = imprimir_menu("filtrar")
+                funciones.principales.buscar_filtro(paises, claves, opcion, todos_los_continentes)     
     
             case 5:
-                funciones.principales.ordenar_filtro(paises, claves)
+                opcion = imprimir_menu("ordenar")
+                funciones.principales.ordenar_filtro(paises, claves, opcion)
     
             case 6:
-                funciones.principales.mostrar_estadisticas(paises, claves)
+                opcion = imprimir_menu("estadisticas")
+                funciones.principales.mostrar_estadisticas(paises, claves, opcion, todos_los_continentes)
     
             case 7:
                 escribir_archivo(paises, claves)

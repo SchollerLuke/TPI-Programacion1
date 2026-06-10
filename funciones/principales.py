@@ -1,4 +1,4 @@
-from . import busqueda
+from . import filtrado
 from . import ordenamiento
 from . import estadisticas
 
@@ -102,6 +102,30 @@ def cambiar_datos(paises, claves, opcion=str):
 
     return pais, poblacion, superficie
 
+def ingrsar_continente(lista_continentes):
+    """Función que permite ingresar un continente
+    
+    Parámetros:
+    ---
+    * lista_continentes: lista con todos los continentes
+    """
+    while True:
+        try:
+            continente = comprobar("Ingrese el continente del país: ", False)
+            if continente not in lista_continentes and all(continente != quitar_tildes(texto) for texto in lista_continentes): 
+                raise ValueError("Solo se pueden ingresar continentes existentes")           
+
+        except ValueError as e:
+            print(f"Error: {e}")
+        else: break
+    
+    for texto in lista_continentes:
+        if continente == quitar_tildes(texto): 
+            continente = texto
+            break
+
+    return continente
+
 def agregar_pais(paises, claves, lista_continentes):
     """Función que permite agregar un país nuevo con todos sus datos
     
@@ -113,21 +137,7 @@ def agregar_pais(paises, claves, lista_continentes):
     """
     pais_nuevo, poblacion, superficie = cambiar_datos(paises, claves, "agregar")
 
-    while True:
-        try:
-            continente = comprobar("Ingrese el continente del país: ", False)
-            if continente == "": raise ValueError("No se permite población vacía")
-            elif continente not in lista_continentes and all(continente != quitar_tildes(texto) for texto in lista_continentes): 
-                raise ValueError("Solo se pueden ingresar continentes existentes")           
-
-        except ValueError as e:
-            print(f"Error: {e}")
-        else: break
-
-    for texto in lista_continentes:
-        if continente == quitar_tildes(texto): 
-            continente = texto
-            break
+    continente = ingrsar_continente(lista_continentes)
 
     print("-"*40)
 
@@ -195,11 +205,77 @@ def buscar_nombre(paises, claves):
 
     print("-"*40)    
 
-def buscar_filtro():
-    pass
+def buscar_filtro(paises, claves, opcion, lista_continentes):
+    """Función que permite buscar países por filtro
+    * El filtro se elige desde el menú de opciones
+    
+    Parámetros:
+    ---
+    * paises: lista de diccionarios con los datos de todos los países
+    * claves: lista con las claves de los diccionarios
+    * opcion: filtro elegido
+    """
+    match opcion:
 
-def ordenar_filtro():
-    pass
+        case 1:
+            filtrado.por_continente(paises, claves, lista_continentes)
 
-def mostrar_estadisticas():
-    pass
+        case 2:
+            filtrado.rango(paises, claves, "poblacion")
+
+        case 3:
+            filtrado.rango(paises, claves, "superficie")
+
+        case 4:
+            return
+
+def ordenar_filtro(paises, claves, opcion):
+    """Función que permite ordenar países por filtro
+    * El filtro se elige desde el menú de opciones
+    
+    Parámetros:
+    ---
+    * paises: lista de diccionarios con los datos de todos los países
+    * claves: lista con las claves de los diccionarios
+    * opcion: filtro elegido
+    """
+    match opcion:
+
+        case 1:
+            ordenamiento.por_nombre(paises, claves)
+
+        case 2:
+            ordenamiento.por_poblacion(paises, claves)
+
+        case 3:
+            ordenamiento.por_superficie(paises, claves)
+
+        case 4:
+            return
+
+def mostrar_estadisticas(paises, claves, opcion, lista_continentes):
+    """Función que permite obtener las estadisticas de los países
+    * La estadística se elige desde el menú de opciones
+    
+    Parámetros:
+    ---
+    * paises: lista de diccionarios con los datos de todos los países
+    * claves: lista con las claves de los diccionarios
+    * opcion: estadística elegida
+    """
+    match opcion:
+
+        case 1:
+            estadisticas.mayor_menor(paises, claves)
+
+        case 2:
+            estadisticas.promedio_poblacion(paises, claves)
+
+        case 3:
+            estadisticas.promedio_superficie(paises, claves)
+
+        case 4:
+            estadisticas.cantidad_por_continente(paises, claves, lista_continentes)
+
+        case 5:
+            return
