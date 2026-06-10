@@ -102,7 +102,7 @@ def cambiar_datos(paises, claves, opcion=str):
 
     return pais, poblacion, superficie
 
-def ingrsar_continente(lista_continentes):
+def ingresar_continente(lista_continentes):
     """Función que permite ingresar un continente
     
     Parámetros:
@@ -137,7 +137,7 @@ def agregar_pais(paises, claves, lista_continentes):
     """
     pais_nuevo, poblacion, superficie = cambiar_datos(paises, claves, "agregar")
 
-    continente = ingrsar_continente(lista_continentes)
+    continente = ingresar_continente(lista_continentes)
 
     print("-"*40)
 

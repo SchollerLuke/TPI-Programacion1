@@ -8,15 +8,21 @@ def mayor_menor_poblacion(paises, claves):
     * paises: lista de diccionarios con los datos de todos los países
     * claves: lista con las claves de los diccionarios
     """
-    paises_ordenados = sorted(
-    paises,
-    key=lambda pais: int(pais[claves[1]]),
-    reverse=True
-    )
-
-    print("-"*40)
-    print(f"País con mayor población: {paises_ordenados[0][claves[0]]} con {paises_ordenados[0][claves[1]]} habitantes")
-    print(f"País con menor población: {paises_ordenados[-1][claves[0]]} con {paises_ordenados[-1][claves[1]]} habitantes")
+    try:
+        paises_ordenados = sorted(
+        paises,
+        key=lambda pais: int(pais[claves[1]]),
+        reverse=True
+        )
+    
+    except ValueError:
+        print("Error en el archivo: el dato de población no es entero")
+    except Exception as e:
+        print(f"Error inesperado: {e}")
+    else:
+        print("-"*40)
+        print(f"País con mayor población: {paises_ordenados[0][claves[0]]} con {paises_ordenados[0][claves[1]]} habitantes")
+        print(f"País con menor población: {paises_ordenados[-1][claves[0]]} con {paises_ordenados[-1][claves[1]]} habitantes")
     print("-"*40)
 
 def promedio_poblacion(paises, claves):
@@ -29,10 +35,16 @@ def promedio_poblacion(paises, claves):
     """
     print("-"*40)
     poblacion_total = 0
-    for linea in paises:
-        poblacion_total += int(linea[claves[1]])
-    
-    print(f"Promedio de población en {len(paises)} paises: {(poblacion_total/len(paises)):.2f}")
+
+    try:
+        for linea in paises:
+            poblacion_total += int(linea[claves[1]])
+    except ValueError:
+        print("Error en el archivo: el dato de población no es entero")
+    except Exception as e:
+        print(f"Error inesperado: {e}")
+    else: print(f"Promedio de población en {len(paises)} paises: {(poblacion_total/len(paises)):.2f}")
+
     print("-"*40)
 
 def promedio_superficie(paises, claves):
@@ -45,10 +57,16 @@ def promedio_superficie(paises, claves):
     """
     print("-"*40)
     superficie_total = 0
-    for linea in paises:
-        superficie_total += int(linea[claves[2]])
+
+    try:
+        for linea in paises:
+            superficie_total += int(linea[claves[2]])
+    except ValueError:
+        print("Error en el archivo: el dato de población no es entero")
+    except Exception as e:
+        print(f"Error inesperado: {e}")
+    else: print(f"Promedio de superficie en {len(paises)} paises: {(superficie_total/len(paises)):.2f}")
     
-    print(f"Promedio de superficie en {len(paises)} paises: {(superficie_total/len(paises)):.2f}")
     print("-"*40)
 
 def cantidad_por_continente(paises, claves, lista_continentes):

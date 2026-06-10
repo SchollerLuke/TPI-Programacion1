@@ -39,12 +39,20 @@ def ordenar(paises, claves, tipo):
     if opcion == 1: orden = "descendente"
     elif opcion == 2: orden = "ascendente"
 
-    paises_ordenados = sorted(
-    paises,
-    key=lambda pais: int(pais[claves[clave_filtro]]),
-    reverse=True if orden == "descendente" else False
-    )   
+    try:
+        paises_ordenados = sorted(
+        paises,
+        key=lambda pais: int(pais[claves[clave_filtro]]),
+        reverse=True if orden == "descendente" else False
+        )   
 
+    except ValueError:
+        print("Error en el archivo: el dato de población o superficie no es entero")
+        paises_ordenados = None
+    except Exception as e:
+        print(f"Error inesperado: {e}")
+        paises_ordenados = None
+    
     return paises_ordenados, orden
 
 def por_poblacion(paises, claves):
@@ -58,9 +66,11 @@ def por_poblacion(paises, claves):
     print("-"*40)
     paises_ordenados, tipo = ordenar(paises, claves, "poblacion")
 
-    print(f"Lista de paises ordenados por población de forma {tipo}")
-    for pais in paises_ordenados:
-        print(f">> {pais[claves[0]]}: {pais[claves[1]]}")
+    if paises_ordenados == None: print("No se ha podido realizar el ordenamiento")
+    else:
+        print(f"Lista de paises ordenados por población de forma {tipo}")
+        for pais in paises_ordenados:
+            print(f">> {pais[claves[0]]}: {pais[claves[1]]}")
     print("-"*40)
 
 def por_superficie(paises, claves):
@@ -74,7 +84,9 @@ def por_superficie(paises, claves):
     print("-"*40)
     paises_ordenados, tipo = ordenar(paises, claves, "superficie")
 
-    print(f"Lista de paises ordenados por superficie de forma {tipo}")
-    for pais in paises_ordenados:
-        print(f">> {pais[claves[0]]}: {pais[claves[2]]}")
+    if paises_ordenados == None: print("No se ha podido realizar el ordenamiento")
+    else:
+        print(f"Lista de paises ordenados por superficie de forma {tipo}")
+        for pais in paises_ordenados:
+            print(f">> {pais[claves[0]]}: {pais[claves[2]]}")
     print("-"*40)

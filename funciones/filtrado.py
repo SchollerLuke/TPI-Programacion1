@@ -9,7 +9,7 @@ def por_continente(paises, claves, lista_continentes):
     * claves: lista con las claves de los diccionarios
     * lista_continentes: lista con todos los continentes
     """
-    continente = principales.ingrsar_continente(lista_continentes)
+    continente = principales.ingresar_continente(lista_continentes)
     print("-"*40)
 
     nombres = []
@@ -41,15 +41,22 @@ def rango(paises, claves, tipo):
 
     nombres = []
     valor = []
-    for linea in paises:
-        if min <= int(linea[claves[clave_filtro]]) <= max:
-            nombres.append(linea[claves[0]])
-            valor.append(linea[claves[clave_filtro]])
 
-    if nombres == []:
-        print("No se han encontrado países en ese rango")
-    else: 
-        print(f"Lista de países en el rango:")
-        for pais in nombres:
-           print(f">> {pais}: {valor[nombres.index(pais)]}")
+    try:
+        for linea in paises:
+            if min <= int(linea[claves[clave_filtro]]) <= max:
+                nombres.append(linea[claves[0]])
+                valor.append(linea[claves[clave_filtro]])
+
+    except ValueError:
+        print("Error en el archivo: el dato de población o superficie no es entero")
+    except Exception as e:
+        print(f"Error inesperado: {e}")
+    else:
+        if nombres == []:
+            print("No se han encontrado países en ese rango")
+        else: 
+            print(f"Lista de países en el rango:")
+            for pais in nombres:
+               print(f">> {pais}: {valor[nombres.index(pais)]}")
     print("-"*40)
