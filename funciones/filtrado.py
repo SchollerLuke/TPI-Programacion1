@@ -1,7 +1,14 @@
 from . import principales
 
 def por_continente(paises, claves, lista_continentes):
-
+    """Función que permite filtrar países por continente
+    
+    Parámetros:
+    ---
+    * paises: lista de diccionarios con los datos de todos los países
+    * claves: lista con las claves de los diccionarios
+    * lista_continentes: lista con todos los continentes
+    """
     continente = principales.ingrsar_continente(lista_continentes)
     print("-"*40)
 
@@ -16,9 +23,16 @@ def por_continente(paises, claves, lista_continentes):
     print("-"*40)
 
 def rango(paises, claves, tipo):
-
-    if tipo == "poblacion": tipo = 1
-    elif tipo == "superficie": tipo = 2
+    """Función que permite filtrar países por rango
+    
+    Parámetros:
+    ---
+    * paises: lista de diccionarios con los datos de todos los países
+    * claves: lista con las claves de los diccionarios
+    * tipo: representa el tipo de filtro; población o superficie
+    """
+    if tipo == "poblacion": clave_filtro = 1
+    elif tipo == "superficie": clave_filtro = 2
 
     min = principales.comprobar("Ingrese valor mínimo de rango: ")
     max = principales.comprobar("Ingrese valor máximo de rango: ")
@@ -28,9 +42,9 @@ def rango(paises, claves, tipo):
     nombres = []
     valor = []
     for linea in paises:
-        if min <= int(linea[claves[tipo]]) <= max:
+        if min <= int(linea[claves[clave_filtro]]) <= max:
             nombres.append(linea[claves[0]])
-            valor.append(linea[claves[tipo]])
+            valor.append(linea[claves[clave_filtro]])
 
     if nombres == []:
         print("No se han encontrado países en ese rango")

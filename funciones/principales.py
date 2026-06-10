@@ -266,7 +266,7 @@ def mostrar_estadisticas(paises, claves, opcion, lista_continentes):
     match opcion:
 
         case 1:
-            estadisticas.mayor_menor(paises, claves)
+            estadisticas.mayor_menor_poblacion(paises, claves)
 
         case 2:
             estadisticas.promedio_poblacion(paises, claves)
