@@ -37,6 +37,7 @@ def quitar_tildes(texto):
     texto_final = []
 
     if any(letra in tupla_tilde[0] for letra in texto):
+        # Si el texto contiene vocales con tilde, las reemplaza por su equivalente sin tilde
 
         for palabra in texto.split():
             palabra_final = ""
@@ -44,6 +45,7 @@ def quitar_tildes(texto):
             for letra in palabra:
                 if letra in tupla_tilde[0]: letra = tupla_tilde[1][tupla_tilde[0].index(letra)]
                 palabra_final += letra
+            # Busca la posición de la vocal con tilde y la reemplaza por la vocal sin tilde
     
             texto_final.append(palabra_final)
         texto_final = " ".join(texto_final)
@@ -71,6 +73,7 @@ def cambiar_datos(paises, claves, opcion=str):
                 encontrado = False
                 for linea in paises: 
                     if linea[claves[0]] == pais or quitar_tildes(linea[claves[0]]) == pais:
+                        # Permite ingresar países con o sin tildes
                         encontrado = True
                         break
                 if opcion == "agregar" and encontrado: raise ValueError("El país ingresado ya existe")
@@ -113,6 +116,7 @@ def ingresar_continente(lista_continentes):
         try:
             continente = comprobar("Ingrese el continente del país: ", False)
             if continente not in lista_continentes and all(continente != quitar_tildes(texto) for texto in lista_continentes): 
+                # Permite ingresar continentes con o sin tildes
                 raise ValueError("Solo se pueden ingresar continentes existentes")           
 
         except ValueError as e:
@@ -186,6 +190,7 @@ def buscar_nombre(paises, claves):
     encontrados = []
     for i, linea in enumerate(paises):
         if pais_buscado in linea[claves[0]] or pais_buscado in quitar_tildes(linea[claves[0]]):
+            # Busca coincidencias parciales tanto en nombres con tilde como sin tilde
             encontrados.append(i)
 
     if len(encontrados) == 0: print("No se ha encontrado ningún país con esa búsqueda")
@@ -199,9 +204,9 @@ def buscar_nombre(paises, claves):
         print("Países encontrados: ")
         for i in range(len(encontrados)):
             print(f">> {paises[ encontrados[i] ][ claves[0] ]}:")    
-            print(f"- Población: {paises[ encontrados[0] ][ claves[1] ]}")
-            print(f"- Superficie: {paises[ encontrados[0] ][ claves[2] ]}")
-            print(f"- Continente: {paises[ encontrados[0] ][ claves[3] ]}")
+            print(f"- Población: {paises[ encontrados[i] ][ claves[1] ]}")
+            print(f"- Superficie: {paises[ encontrados[i] ][ claves[2] ]}")
+            print(f"- Continente: {paises[ encontrados[i] ][ claves[3] ]}")
 
     print("-"*40)    
 
@@ -216,6 +221,7 @@ def buscar_filtro(paises, claves, opcion, lista_continentes):
     * opcion: filtro elegido
     """
     match opcion:
+        # Ejecuta la función correspondiente según la opción seleccionada en el menú
 
         case 1:
             filtrado.por_continente(paises, claves, lista_continentes)
@@ -240,6 +246,7 @@ def ordenar_filtro(paises, claves, opcion):
     * opcion: filtro elegido
     """
     match opcion:
+        # Ejecuta la función correspondiente según la opción seleccionada en el menú
 
         case 1:
             ordenamiento.por_nombre(paises, claves)
@@ -264,6 +271,7 @@ def mostrar_estadisticas(paises, claves, opcion, lista_continentes):
     * opcion: estadística elegida
     """
     match opcion:
+        # Ejecuta la función correspondiente según la opción seleccionada en el menú
 
         case 1:
             estadisticas.mayor_menor_poblacion(paises, claves)

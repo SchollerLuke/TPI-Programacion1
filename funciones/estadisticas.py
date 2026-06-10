@@ -14,6 +14,7 @@ def mayor_menor_poblacion(paises, claves):
         key=lambda pais: int(pais[claves[1]]),
         reverse=True
         )
+        # Ordena los países usando la población como criterio de comparación
     
     except ValueError:
         print("Error en el archivo: el dato de población no es entero")
@@ -80,6 +81,8 @@ def cantidad_por_continente(paises, claves, lista_continentes):
     """
     print("-"*40)
     paises_por_continente = dict.fromkeys(lista_continentes, 0)
+    # Crea un diccionario con cada continente como clave e inicializa el contador en 0
+    
     for linea in paises:
         continente = linea[claves[3]]
         paises_por_continente[continente] += 1

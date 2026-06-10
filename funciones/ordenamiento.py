@@ -14,7 +14,7 @@ def por_nombre(paises, claves):
         nombres.append(linea[claves[0]])
     
     print("Lista de paises ordenados por nombre")
-    for pais in nombres:
+    for pais in sorted(nombres):
         print(f">> {pais}")
     print("-"*40)
 
@@ -45,6 +45,7 @@ def ordenar(paises, claves, tipo):
         key=lambda pais: int(pais[claves[clave_filtro]]),
         reverse=True if orden == "descendente" else False
         )   
+        # Ordena los países usando la población o la superficie como criterio de comparación
 
     except ValueError:
         print("Error en el archivo: el dato de población o superficie no es entero")

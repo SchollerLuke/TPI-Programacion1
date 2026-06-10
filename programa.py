@@ -97,7 +97,7 @@ def imprimir_menu(menu):
         case "estadisticas":
             opciones = (1,6)
             print("\n" + "=" * 40)
-            print("MENU DE ESTADISTICA".center(40))
+            print("MENU DE ESTADISTICAS".center(40))
             print("=" * 40)
             print("1. País con menor y mayor población")
             print("2. Promedio de población")
@@ -122,6 +122,7 @@ def main():
     
     while paises != None:
         match imprimir_menu("principal"):
+            # Ejecuta la función correspondiente según la opción seleccionada en el menú
     
             case 1:
                 paises = funciones.principales.agregar_pais(paises, claves, todos_los_continentes)
